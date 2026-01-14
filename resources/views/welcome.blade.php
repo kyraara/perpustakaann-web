@@ -102,11 +102,6 @@
 
         <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
             <div class="space-y-8 max-w-4xl mx-auto">
-                {{-- Badge --}}
-                <!-- <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-emerald-300 text-sm font-medium animate-fade-in-up">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    Perpustakaan Digital {{ $setting->get('nama_sekolah', 'SD N 3 Prabumulih') }}
-                </div> -->
 
                 {{-- Headline --}}
                 <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight animate-fade-in-up delay-100 font-fredoka drop-shadow-lg">
@@ -162,10 +157,9 @@
     </section>
 
     <!-- 4. Info Board & Announcements -->
-    <section class="py-16 bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+    <!-- <section class="py-16 bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Library Info -->
                 <div class="lg:col-span-1 bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-sm border border-slate-100 dark:border-slate-700 h-full">
                     <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-6 flex items-center gap-2">
                         <i class="fas fa-clock text-emerald-500"></i> Jam Operasional
@@ -190,7 +184,6 @@
                     </div>
                 </div>
 
-                <!-- Announcements -->
                 <div class="lg:col-span-2 bg-emerald-600 dark:bg-emerald-900 rounded-3xl p-8 shadow-lg relative overflow-hidden text-white flex flex-col justify-center">
                     <div class="relative z-10">
                         <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-bold mb-4 backdrop-blur-sm border border-white/20">
@@ -205,7 +198,6 @@
                         </a>
                     </div>
                     
-                    <!-- Decor -->
                     <div class="absolute right-0 bottom-0 opacity-10">
                         <i class="fas fa-book-reader text-9xl transform translate-x-10 translate-y-10"></i>
                     </div>
@@ -213,7 +205,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
 
 

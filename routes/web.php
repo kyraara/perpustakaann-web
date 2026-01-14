@@ -19,10 +19,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Google OAuth Routes
-Route::get('/auth/google', [App\Http\Controllers\Auth\SocialAuthController::class, 'redirectToGoogle'])->name('auth.google');
-Route::get('/auth/google/callback', [App\Http\Controllers\Auth\SocialAuthController::class, 'handleGoogleCallback']);
-
 Route::get('/dashboard', function () {
     $user = Auth::user();
     if ($user->isAdmin()) {
@@ -104,14 +100,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/search', [\App\Http\Controllers\Admin\SearchController::class, 'index'])->name('search.index');
 });
 
-// Complete Profile Route (for Google-signed users)
-Route::middleware(['auth'])->prefix('siswa')->name('siswa.')->group(function () {
-    Route::get('/complete-profile', [App\Http\Controllers\Auth\CompleteProfileController::class, 'show'])->name('complete-profile');
-    Route::put('/complete-profile', [App\Http\Controllers\Auth\CompleteProfileController::class, 'update'])->name('complete-profile.update');
-});
-
 // Siswa Routes
-Route::middleware(['auth', 'role:siswa', \App\Http\Middleware\EnsureSiswaProfileComplete::class])->prefix('siswa')->name('siswa.')->group(function () {
+Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->name('siswa.')->group(function () {
     Route::get('/dashboard', [SiswaDashboardController::class, 'index'])->name('dashboard');
     
     // Buku
