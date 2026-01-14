@@ -27,7 +27,6 @@
                             <th class="py-3 px-4 text-center font-medium hidden sm:table-cell">Tgl Pinjam</th>
                             <th class="py-3 px-4 text-center font-medium hidden sm:table-cell">Tgl Kembali</th>
                             <th class="py-3 px-4 text-center font-medium">Status</th>
-                            <th class="py-3 px-4 text-center font-medium">Denda</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
@@ -59,13 +58,6 @@
                                         <span class="inline-flex items-center px-2 py-1 bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-400 rounded-full text-xs font-medium">
                                             <i class="fas fa-clock mr-1"></i> Dipinjam
                                         </span>
-                                    @endif
-                                </td>
-                                <td class="py-3 px-4 text-center">
-                                    @if($p->denda > 0)
-                                        <span class="text-rose-600 dark:text-rose-400 font-medium">Rp {{ number_format($p->denda, 0, ',', '.') }}</span>
-                                    @else
-                                        <span class="text-slate-400">-</span>
                                     @endif
                                 </td>
                             </tr>

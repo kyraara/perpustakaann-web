@@ -19,7 +19,6 @@ class Peminjaman extends Model
         'tanggal_pinjam',
         'tanggal_kembali',
         'tanggal_dikembalikan',
-        'denda',
         'status',
     ];
 
@@ -39,35 +38,12 @@ class Peminjaman extends Model
         return $this->belongsTo(Buku::class);
     }
 
-    public function hitungDenda(): int
-    {
-        if ($this->status === 'dikembalikan' || !$this->tanggal_dikembalikan) {
-            $tanggalAcuan = $this->tanggal_dikembalikan ?? Carbon::now();
-        } else {
-            $tanggalAcuan = $this->tanggal_dikembalikan;
-        }
-
-        if ($tanggalAcuan->gt($this->tanggal_kembali)) {
-            $hariTerlambat = $tanggalAcuan->diffInDays($this->tanggal_kembali);
-            $dendaPerHari = Pengaturan::getValue('denda_per_hari', 500);
-            return $hariTerlambat * $dendaPerHari;
-        }
-
-        return 0;
-    }
-
     public function isTerlambat(): bool
     {
         if ($this->status === 'dikembalikan') {
             return $this->tanggal_dikembalikan->gt($this->tanggal_kembali);
         }
         return Carbon::now()->gt($this->tanggal_kembali);
-    }
-
-    // Accessor untuk denda otomatis (real-time calculation)
-    public function getDendaOtomatisAttribute(): int
-    {
-        return $this->hitungDenda();
     }
 
     // Accessor untuk hari terlambat

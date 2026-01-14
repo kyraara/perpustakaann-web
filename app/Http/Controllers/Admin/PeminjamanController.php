@@ -104,37 +104,18 @@ class PeminjamanController extends Controller
                 ->with('error', 'Peminjaman sudah dikembalikan!');
         }
 
-        $tanggalDikembalikan = Carbon::now();
-        $denda = 0;
-
-        if ($tanggalDikembalikan->gt($peminjaman->tanggal_kembali)) {
-            $hariTerlambat = $tanggalDikembalikan->diffInDays($peminjaman->tanggal_kembali);
-            $dendaPerHari = Pengaturan::getValue('denda_per_hari', 500);
-            $denda = $hariTerlambat * $dendaPerHari;
-        }
-
         $peminjaman->update([
-            'tanggal_dikembalikan' => $tanggalDikembalikan,
-            'denda' => $denda,
+            'tanggal_dikembalikan' => Carbon::now(),
             'status' => 'dikembalikan',
         ]);
 
-        $message = 'Buku berhasil dikembalikan!';
-        if ($denda > 0) {
-            $message .= ' Denda keterlambatan: Rp ' . number_format($denda, 0, ',', '.');
-        }
-
-
         return redirect()->route('admin.peminjaman.index')
-            ->with('success', $message);
+            ->with('success', 'Buku berhasil dikembalikan!');
     }
 
     public function destroy(Peminjaman $peminjaman)
     {
-        $id = $peminjaman->id;
-        $desc = "Menghapus peminjaman ID#{$id}";
         $peminjaman->delete();
-
 
         return redirect()->route('admin.peminjaman.index')
             ->with('success', 'Data peminjaman berhasil dihapus!');
@@ -148,39 +129,22 @@ class PeminjamanController extends Controller
         ]);
 
         $count = 0;
-        $totalDenda = 0;
         $now = Carbon::now();
-        $dendaPerHari = Pengaturan::getValue('denda_per_hari', 500);
 
         foreach ($request->peminjaman_ids as $id) {
             $peminjaman = Peminjaman::find($id);
             
             if ($peminjaman && $peminjaman->status === 'dipinjam') {
-                $denda = 0;
-                
-                if ($now->gt($peminjaman->tanggal_kembali)) {
-                    $hariTerlambat = $now->diffInDays($peminjaman->tanggal_kembali);
-                    $denda = $hariTerlambat * $dendaPerHari;
-                }
-
                 $peminjaman->update([
                     'tanggal_dikembalikan' => $now,
-                    'denda' => $denda,
                     'status' => 'dikembalikan',
                 ]);
 
-                $totalDenda += $denda;
                 $count++;
             }
         }
 
-
-        $message = "{$count} buku berhasil dikembalikan!";
-        if ($totalDenda > 0) {
-            $message .= " Total denda: Rp " . number_format($totalDenda, 0, ',', '.');
-        }
-
         return redirect()->route('admin.peminjaman.index')
-            ->with('success', $message);
+            ->with('success', "{$count} buku berhasil dikembalikan!");
     }
 }

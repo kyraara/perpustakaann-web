@@ -33,12 +33,26 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'nisn' => ['required', 'string', 'size:10', 'unique:users,nisn'],
+            'kelas' => ['required', 'string', 'max:20'],
+            'jenis_kelamin' => ['required', 'in:L,P'],
+        ], [
+            'nisn.required' => 'NISN wajib diisi.',
+            'nisn.size' => 'NISN harus terdiri dari 10 digit.',
+            'nisn.unique' => 'NISN sudah terdaftar.',
+            'kelas.required' => 'Kelas wajib dipilih.',
+            'jenis_kelamin.required' => 'Jenis kelamin wajib dipilih.',
+            'jenis_kelamin.in' => 'Jenis kelamin tidak valid.',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'siswa',
+            'nisn' => $request->nisn,
+            'kelas' => $request->kelas,
+            'jenis_kelamin' => $request->jenis_kelamin,
         ]);
 
         event(new Registered($user));

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Perpustakaan Digital {{ $setting->get('nama_sekolah', 'SD N 3 Prabumulih') }}</title>
+    <title>Perpustakaan Digital {{ $setting->get('nama_sekolah', 'SD N 9 Prabumulih') }}</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

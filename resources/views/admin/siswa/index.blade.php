@@ -17,7 +17,7 @@
                         <option value="">Semua Kelas</option>
                         @foreach($kelasList as $kelas)
                             <option value="{{ $kelas }}" {{ request('kelas') == $kelas ? 'selected' : '' }}>
-                                {{ $kelas }}
+                                Kelas {{ $kelas }}
                             </option>
                         @endforeach
                     </select>
@@ -39,6 +39,7 @@
                         <th class="py-4 px-4 text-left rounded-l-xl">Siswa</th>
                         <th class="py-4 px-4 text-left">NISN</th>
                         <th class="py-4 px-4 text-center">Kelas</th>
+                        <th class="py-4 px-4 text-center">Jenis Kelamin</th>
                         <th class="py-4 px-4 text-center">Peminjaman Aktif</th>
                         <th class="py-4 px-4 text-center rounded-r-xl">Aksi</th>
                     </tr>
@@ -48,7 +49,7 @@
                         <tr class="hover:bg-gray-50 transition-colors">
                             <td class="py-4 px-4">
                                 <div class="flex items-center">
-                                    <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white font-bold mr-3">
+                                    <div class="w-10 h-10 bg-gradient-to-br {{ $siswa->jenis_kelamin == 'L' ? 'from-blue-400 to-indigo-500' : 'from-pink-400 to-rose-500' }} rounded-full flex items-center justify-center text-white font-bold mr-3">
                                         {{ strtoupper(substr($siswa->name, 0, 1)) }}
                                     </div>
                                     <div>
@@ -62,8 +63,21 @@
                             </td>
                             <td class="py-4 px-4 text-center">
                                 <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
-                                    {{ $siswa->kelas ?? '-' }}
+                                    Kelas {{ $siswa->kelas ?? '-' }}
                                 </span>
+                            </td>
+                            <td class="py-4 px-4 text-center">
+                                @if($siswa->jenis_kelamin == 'L')
+                                    <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">
+                                        <i class="fas fa-mars mr-1"></i> Laki-laki
+                                    </span>
+                                @elseif($siswa->jenis_kelamin == 'P')
+                                    <span class="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-sm font-medium">
+                                        <i class="fas fa-venus mr-1"></i> Perempuan
+                                    </span>
+                                @else
+                                    <span class="text-gray-400">-</span>
+                                @endif
                             </td>
                             <td class="py-4 px-4 text-center">
                                 <span class="px-3 py-1 {{ $siswa->active_loans > 0 ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-600' }} rounded-full text-sm font-medium">
@@ -89,7 +103,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="py-12 text-center text-gray-400">
+                            <td colspan="6" class="py-12 text-center text-gray-400">
                                 <i class="fas fa-users text-4xl mb-3"></i>
                                 <p>Belum ada siswa</p>
                             </td>

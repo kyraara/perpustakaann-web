@@ -19,7 +19,6 @@ class PengaturanController extends Controller
     {
         $validated = $request->validate([
             'lama_pinjam' => 'required|integer|min:1|max:30',
-            'denda_per_hari' => 'required|integer|min:0',
             'max_pinjam' => 'required|integer|min:1|max:10',
             'durasi_opsi' => 'required|string|max:100',
             'nama_sekolah' => 'required|string|max:255',

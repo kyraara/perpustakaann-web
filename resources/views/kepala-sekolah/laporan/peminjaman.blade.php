@@ -39,8 +39,7 @@
                         <th class="py-4 px-4 text-left">Buku</th>
                         <th class="py-4 px-4 text-center">Tgl Pinjam</th>
                         <th class="py-4 px-4 text-center">Tgl Kembali</th>
-                        <th class="py-4 px-4 text-center">Status</th>
-                        <th class="py-4 px-4 text-center rounded-r-xl">Denda</th>
+                        <th class="py-4 px-4 text-center rounded-r-xl">Status</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
@@ -48,7 +47,7 @@
                         <tr class="hover:bg-gray-50 transition-colors">
                             <td class="py-4 px-4">
                                 <p class="font-medium text-gray-800">{{ $p->user->name ?? 'Unknown' }}</p>
-                                <p class="text-sm text-gray-500">{{ $p->user->kelas ?? '' }}</p>
+                                <p class="text-sm text-gray-500">Kelas {{ $p->user->kelas ?? '-' }}</p>
                             </td>
                             <td class="py-4 px-4">
                                 <p class="font-medium text-gray-800">{{ Str::limit($p->buku->judul ?? 'Unknown', 30) }}</p>
@@ -60,17 +59,10 @@
                                     {{ ucfirst($p->status) }}
                                 </span>
                             </td>
-                            <td class="py-4 px-4 text-center">
-                                @if($p->denda > 0)
-                                    <span class="text-red-600">Rp {{ number_format($p->denda, 0, ',', '.') }}</span>
-                                @else
-                                    -
-                                @endif
-                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="py-12 text-center text-gray-400">Tidak ada data</td>
+                            <td colspan="5" class="py-12 text-center text-gray-400">Tidak ada data</td>
                         </tr>
                     @endforelse
                 </tbody>

@@ -19,11 +19,6 @@ class PengaturanSeeder extends Seeder
                 'description' => 'Lama peminjaman buku dalam hari',
             ],
             [
-                'key' => 'denda_per_hari',
-                'value' => '500',
-                'description' => 'Denda keterlambatan per hari (Rupiah)',
-            ],
-            [
                 'key' => 'max_pinjam',
                 'value' => '2',
                 'description' => 'Maksimal buku yang dapat dipinjam per siswa',

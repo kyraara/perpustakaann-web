@@ -50,9 +50,15 @@ class SiswaController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'nisn' => 'required|string|max:20|unique:users,nisn',
+            'nisn' => 'required|string|size:10|unique:users,nisn',
             'kelas' => 'required|string|max:10',
+            'jenis_kelamin' => 'required|in:L,P',
             'password' => 'required|string|min:6|confirmed',
+        ], [
+            'nisn.size' => 'NISN harus terdiri dari 10 digit.',
+            'nisn.unique' => 'NISN sudah terdaftar.',
+            'jenis_kelamin.required' => 'Jenis kelamin wajib dipilih.',
+            'jenis_kelamin.in' => 'Jenis kelamin tidak valid.',
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -75,9 +81,15 @@ class SiswaController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $siswa->id,
-            'nisn' => 'required|string|max:20|unique:users,nisn,' . $siswa->id,
+            'nisn' => 'required|string|size:10|unique:users,nisn,' . $siswa->id,
             'kelas' => 'required|string|max:10',
+            'jenis_kelamin' => 'required|in:L,P',
             'password' => 'nullable|string|min:6|confirmed',
+        ], [
+            'nisn.size' => 'NISN harus terdiri dari 10 digit.',
+            'nisn.unique' => 'NISN sudah terdaftar.',
+            'jenis_kelamin.required' => 'Jenis kelamin wajib dipilih.',
+            'jenis_kelamin.in' => 'Jenis kelamin tidak valid.',
         ]);
 
         if ($validated['password']) {

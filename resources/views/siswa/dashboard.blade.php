@@ -67,7 +67,7 @@
                 </div>
                 <div>
                     <h3 class="font-bold text-rose-800 dark:text-rose-300">⚠️ Perhatian!</h3>
-                    <p class="text-sm text-rose-600 dark:text-rose-400">Kamu memiliki {{ $peminjamanTerlambat->count() }} buku yang terlambat dikembalikan. Segera kembalikan untuk menghindari denda.</p>
+                    <p class="text-sm text-rose-600 dark:text-rose-400">Kamu memiliki {{ $peminjamanTerlambat->count() }} buku yang terlambat dikembalikan. Segera kembalikan ke perpustakaan.</p>
                 </div>
             </div>
         </div>

@@ -12,17 +12,11 @@
                     Pengaturan Peminjaman
                 </h4>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Lama Pinjam Maks (Hari)</label>
                         <input type="number" name="lama_pinjam" min="1" max="30" required
                                value="{{ $pengaturans->firstWhere('key', 'lama_pinjam')?->value ?? 7 }}"
-                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Denda Per Hari (Rp)</label>
-                        <input type="number" name="denda_per_hari" min="0" required
-                               value="{{ $pengaturans->firstWhere('key', 'denda_per_hari')?->value ?? 500 }}"
                                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
                     </div>
                     <div>

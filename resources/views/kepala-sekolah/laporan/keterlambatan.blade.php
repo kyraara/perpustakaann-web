@@ -11,8 +11,7 @@
                         <th class="py-4 px-4 text-left">Buku</th>
                         <th class="py-4 px-4 text-center">Tgl Pinjam</th>
                         <th class="py-4 px-4 text-center">Batas Kembali</th>
-                        <th class="py-4 px-4 text-center">Status</th>
-                        <th class="py-4 px-4 text-center rounded-r-xl">Denda</th>
+                        <th class="py-4 px-4 text-center rounded-r-xl">Status</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
@@ -25,7 +24,7 @@
                         <tr class="hover:bg-gray-50 transition-colors {{ $p->status === 'dipinjam' ? 'bg-red-50' : '' }}">
                             <td class="py-4 px-4">
                                 <p class="font-medium text-gray-800">{{ $p->user->name ?? 'Unknown' }}</p>
-                                <p class="text-sm text-gray-500">{{ $p->user->kelas ?? '' }}</p>
+                                <p class="text-sm text-gray-500">Kelas {{ $p->user->kelas ?? '-' }}</p>
                             </td>
                             <td class="py-4 px-4 font-medium text-gray-800">{{ Str::limit($p->buku->judul ?? 'Unknown', 25) }}</td>
                             <td class="py-4 px-4 text-center text-sm">{{ $p->tanggal_pinjam->format('d M Y') }}</td>
@@ -41,13 +40,10 @@
                                     </span>
                                 @endif
                             </td>
-                            <td class="py-4 px-4 text-center">
-                                <span class="text-red-600 font-bold">Rp {{ number_format($p->denda, 0, ',', '.') }}</span>
-                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="py-12 text-center text-gray-400">
+                            <td colspan="5" class="py-12 text-center text-gray-400">
                                 <i class="fas fa-check-circle text-4xl text-green-400 mb-3"></i>
                                 <p>Tidak ada keterlambatan</p>
                             </td>

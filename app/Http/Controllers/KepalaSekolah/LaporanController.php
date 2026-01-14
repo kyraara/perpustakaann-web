@@ -58,12 +58,14 @@ class LaporanController extends Controller
     {
         $peminjamans = Peminjaman::with(['user', 'buku'])
             ->where(function ($query) {
+                // Currently borrowed and late
                 $query->where('status', 'dipinjam')
                     ->where('tanggal_kembali', '<', Carbon::now());
             })
             ->orWhere(function ($query) {
+                // Returned late (returned after due date)
                 $query->where('status', 'dikembalikan')
-                    ->where('denda', '>', 0);
+                    ->whereColumn('tanggal_dikembalikan', '>', 'tanggal_kembali');
             })
             ->orderBy('tanggal_kembali', 'asc')
             ->paginate(15);
